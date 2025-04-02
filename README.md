@@ -18,17 +18,44 @@ T
 This skill system(not shared yet) works just like this;
 Everytime you sucesfully "Mine" as in your mining chance went through sucesfully, you'll progress in your Mining Skill, only the successful hits are taken as a progression.
 The formula as of now for a success hit works like this; 
-        float successChance = baseMineChance + Mathf.Log(skills.miningLevel + 1) / (difficultyModifier * 5);
+        *float successChance = baseMineChance + Mathf.Log(skills.miningLevel + 1) / (difficultyModifier * 5);
 
-        // Clamp the success chance between 0 and 1
-        successChance = Mathf.Clamp(successChance, 0f, 0.8f); // Cap the success chance at 80%
+        *// Clamp the success chance between 0 and 1
+        *successChance = Mathf.Clamp(successChance, 0f, 0.8f); // Cap the success chance at 80%
 
-        // Roll for success
-        bool success = Random.value < successChance;
+        *// Roll for success
+        *bool success = Random.value < successChance;
 
 If the mining hit is successful, it will pass the xp to my method addskillxp and for debugging purposes will display a log; 
-            skills.AddSkillXP("mining", xpReward);
-            Debug.Log($"Adding {xpReward} XP to Mining skill.");
+            *skills.AddSkillXP("mining", xpReward);
+            *Debug.Log($"Adding {xpReward} XP to Mining skill.");
+
+Example of how my Skill class works;
+
+        public class PlayerSkills : MonoBehaviour
+        public float miningLevel = 1;
+        private float miningXP = 0;
+        public void AddSkillXP(string skillName, float xpGain)
+    {  
+        switch (skillName.ToLower())
+        {       
+                case "mining":
+                AddXP(ref miningXP, ref miningLevel, xpGain);
+                break;
+        private void AddXP(ref float skillXP, ref float skillLevel, float xpGain)
+    {
+        skillXP += xpGain;
+        
+        float requiredXP = FormulaManager.CalculateSkillExperienceToNextLevel(skillLevel);
+        if (skillXP >= requiredXP)
+        {
+            skillXP = 0;
+            skillLevel++;
+            Debug.Log($"{GetSkillName(skillLevel)} leveled up to {skillLevel}!");
+        }
+
+Pay attention to the part where I call a formula manager class, that's where you'll do your formula to how much xp is needed, you can also do it all in one class, but for good practice I made a class only for formulas, its easier to maintain.
+        
 # REWARD
 
 Now when talking about what the rewards you have to options, you can either make a small customization (I had this done prior) that will instead of place the item in the player inventory, it will drop the item below the player and then he can decide wether to collect it or not. The second option is for you to add it directly to inventory after performing some checks. Regardless of your choice, you'll have to modify the GrantRewards() method. I left the method commented out and with my own calls to my inventory to check if the inventory has slots available, then create a item and add it to the inventory.
