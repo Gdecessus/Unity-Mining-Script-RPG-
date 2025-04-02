@@ -6,7 +6,7 @@ Now, before we start getting into the mechanics of the script, its important to 
 This script was made with the intention to be used for every kind of 'resource gathering' tasks in a RPG. So, as you can see by looking at the script, nothing is stopping you from changing the sprites from a node to a tree, herb, farming and so on, the mechanic remains the very same!
 
 
-#INTRO
+# INTRO
 
 The mechanics of the mining system are modular, they are are dependent to a skill system just like old MMO's like runescape/tibia.
 Most of our important features can be adjusted directly through the inspector, without the need to code, in the inspector you can find virtually all aspects of the mechanics of the script.
@@ -14,7 +14,7 @@ Including but not limited to mining chance, skill xp given per succesfull mining
 The script depends on a few elements that will require your attention when implementing to your game, firstly, the game counts on a skill system.
 T
 
-#SKILL
+# SKILL
 This skill system(not shared yet) works just like this;
 Everytime you sucesfully "Mine" as in your mining chance went through sucesfully, you'll progress in your Mining Skill, only the successful hits are taken as a progression.
 The formula as of now for a success hit works like this; 
@@ -29,7 +29,7 @@ The formula as of now for a success hit works like this;
 If the mining hit is successful, it will pass the xp to my method addskillxp and for debugging purposes will display a log; 
             skills.AddSkillXP("mining", xpReward);
             Debug.Log($"Adding {xpReward} XP to Mining skill.");
-#REWARD
+# REWARD
 
 Now when talking about what the rewards you have to options, you can either make a small customization (I had this done prior) that will instead of place the item in the player inventory, it will drop the item below the player and then he can decide wether to collect it or not. The second option is for you to add it directly to inventory after performing some checks. Regardless of your choice, you'll have to modify the GrantRewards() method. I left the method commented out and with my own calls to my inventory to check if the inventory has slots available, then create a item and add it to the inventory.
 
@@ -37,11 +37,11 @@ Now when talking about what the rewards you have to options, you can either make
 
 I used a VFX that is a particle system with sparks using URP. so either a sucessful hit or a failed hit will still produces the same VFX and the audio that comes with the VFX.
 
-#RESPAWN/DESPAWN
+# RESPAWN/DESPAWN
 
 In the inspector we do set a timer to how long we do want our mining node to be 'unavailable', its important to note, that even though I had the chance of removing the GO all together from the scene, I found that rather than removing the GO, it would make more sense in a garbage collection sense and optimization of code/logic to keep it in a non active state with a 'degraded' sprite. in the inspector you'll be able to select 3 stages, youre free to add more as you need, its pretty straight forward.
 
-#RAY TRACING
+# RAY TRACING
 
 Probably the biggest challange was to come up with a way to check if the player was actually facing the node in order to mine. I tried using different systems like a box collider as a child object and a script to always adjust based on keyboard input, then later with controller input, and a few other settings that unfortunately didnt work for me.
 I then, decided why not just everytime the player try to mine we use ray tracing to throw a 'ray' in the forward position and if it hits a GO that has a layer 'ore' it will allow the mechanics to identify if the player is facing or not a node.
