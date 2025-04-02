@@ -12,7 +12,6 @@ The mechanics of the mining system are modular, they are are dependent to a skil
 Most of our important features can be adjusted directly through the inspector, without the need to code, in the inspector you can find virtually all aspects of the mechanics of the script.
 Including but not limited to mining chance, skill xp given per succesfull mining, mining stages sprites, VFX and such.
 The script depends on a few elements that will require your attention when implementing to your game, firstly, the game counts on a skill system.
-T
 
 # SKILL
 This skill system(not shared yet) works just like this;
