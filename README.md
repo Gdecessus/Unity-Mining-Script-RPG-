@@ -54,7 +54,7 @@ Example of how my Skill class works;
             Debug.Log($"{GetSkillName(skillLevel)} leveled up to {skillLevel}!");
         }
 
-Pay attention to the part where I call a formula manager class, that's where you'll do your formula to how much xp is needed, you can also do it all in one class, but for good practice I made a class only for formulas, its easier to maintain.
+Pay attention to the part where I call a formula manager class, that's where you'll do your formula to how much xp is needed to level up and so on, you can also do it all in one class, but for good practice I made a class only for formulas, its easier to maintain.
         
 # REWARD
 
