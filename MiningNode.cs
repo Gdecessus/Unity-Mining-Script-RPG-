@@ -54,7 +54,7 @@ public class MiningNode : MonoBehaviour
 
     private void Update()
     {
-        
+        //for testing purposes I used keycode B, change as you see fit
         if (Input.GetKeyDown(KeyCode.B))
         {
             if (isMined || isOnCooldown) return;
