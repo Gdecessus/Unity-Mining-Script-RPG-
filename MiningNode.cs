@@ -224,8 +224,8 @@ public class MiningNode : MonoBehaviour
     // node never leaves the scene, stays unminable to avoid unity instantiation garbage collection
     private IEnumerator RespawnNode()
     {
-        float respawnTime = Random.Range(minRespawnTime, maxRespawnTime); =
-        yield return new WaitForSeconds(respawnTime); =
+        float respawnTime = Random.Range(minRespawnTime, maxRespawnTime); 
+        yield return new WaitForSeconds(respawnTime); 
 
         // Reset the mining node
         isMined = false;
